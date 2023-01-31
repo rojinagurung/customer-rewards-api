@@ -2,7 +2,11 @@
 Customer Retail Rewards API
 
 ## Swagger UI path:
-swagger-ui/index.html
+[http://localhost:8080//swagger-ui/index.html]()
+
+### Available Test Customers
+Three customers with customer id 1,2 and 3 are available for testing the service.
+This data is loaded from `import.sql` file from the classpath during startup.
 
 ---
 Curls for supported API calls

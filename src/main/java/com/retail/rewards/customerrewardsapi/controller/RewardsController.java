@@ -13,6 +13,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/v1/api/reward")
 public class RewardsController {
+    private static final String CUSTOMER_ID_KEY = "customerId";
+    private static final String MONTH_KEY = "month";
+    private static final String MONTHLY_REWARDS_KEY = "monthlyRewards";
+    private static final String TOTAL_REWARDS_EARNED_KEY = "totalRewardsEarned";
     private CustomerRewardsService customerRewardsService;
 
     public RewardsController(CustomerRewardsService customerRewardsService) {
@@ -20,16 +24,16 @@ public class RewardsController {
     }
 
     @GetMapping("/customer/{customerId}/month/{monthNumeral}")
-    public Map<String, Object> monthlyRewardsPoint(@PathVariable("customerId") Long customerId, @PathVariable("monthNumeral") String month) {
+    public Map<String, Object> monthlyRewardsPoint(@PathVariable(CUSTOMER_ID_KEY) Long customerId, @PathVariable("monthNumeral") String month) {
         Map<String, Object> responseMap = new LinkedHashMap<>();
-        responseMap.put("customerId", customerId);
-        responseMap.put("mont", Month.of(Integer.parseInt(month)));
-        responseMap.put("monthlyRewards", customerRewardsService.getPointsPerMonth(customerId, month));
+        responseMap.put(CUSTOMER_ID_KEY, customerId);
+        responseMap.put(MONTH_KEY, Month.of(Integer.parseInt(month)));
+        responseMap.put(MONTHLY_REWARDS_KEY, customerRewardsService.getPointsPerMonth(customerId, month));
         return responseMap;
     }
 
     @GetMapping("/customer/{customerId}/monthlyReport")
-    public Map<String, Object> getMonthlyReport(@PathVariable("customerId") Long customerId) {
+    public Map<String, Object> getMonthlyReport(@PathVariable(CUSTOMER_ID_KEY) Long customerId) {
         return customerRewardsService.getMonthlyReport(customerId);
 
     }
@@ -37,8 +41,8 @@ public class RewardsController {
     @GetMapping("/customer/{id}/totalPoints")
     public Map<String, Object> totalRewardsPoint(@PathVariable("id") Long customerId) {
         Map<String, Object> responseMap = new LinkedHashMap<>();
-        responseMap.put("customerId", customerId);
-        responseMap.put("totalRewardsEarned", customerRewardsService.getTotalPoints(customerId));
+        responseMap.put(CUSTOMER_ID_KEY, customerId);
+        responseMap.put(TOTAL_REWARDS_EARNED_KEY, customerRewardsService.getTotalPoints(customerId));
         return responseMap;
     }
 }

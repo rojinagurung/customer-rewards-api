@@ -16,7 +16,6 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
 
     public Transaction saveTransaction(Transaction transaction) {
-        transaction.setTransactionRewards(RewardsUtil.calculateRewardsPerTransactionAmount(transaction.getTransactionAmount()));
         return transactionRepository.save(transaction);
     }
 

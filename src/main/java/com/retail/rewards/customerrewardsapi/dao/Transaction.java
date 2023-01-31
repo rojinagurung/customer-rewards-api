@@ -17,8 +17,7 @@ public class Transaction {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate transactionDate;
-    private double transactionAmount;
-    private int transactionRewards;
+    private int transactionAmount;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customerId", nullable = false)
     private Customer customer;
