@@ -27,10 +27,6 @@ public class CustomerRewardsImpl implements CustomerRewardsService {
                 .calculateTotalForMonth(getTransactionsForCustomer(customerId), Month.of(Integer.parseInt(month)));
     }
 
-    private Customer getCustomer(Long customerId) {
-        return customerService.getCustomerById(customerId);
-    }
-
     @Override
     public Integer getTotalPoints(Long customerId) {
         return RewardsUtil
@@ -45,6 +41,10 @@ public class CustomerRewardsImpl implements CustomerRewardsService {
         Set<Month> monthSet = transactions.stream().map(transaction -> transaction.getTransactionDate().getMonth()).collect(Collectors.toSet());
         monthSet.forEach(month -> returnValue.put(month.toString(), RewardsUtil.calculateTotalForMonth(transactions, month)));
         return returnValue;
+    }
+
+    private Customer getCustomer(Long customerId) {
+        return customerService.getCustomerById(customerId);
     }
 
     private List<Transaction> getTransactionsForCustomer(Long customerId) {

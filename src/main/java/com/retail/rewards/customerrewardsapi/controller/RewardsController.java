@@ -35,7 +35,6 @@ public class RewardsController {
     @GetMapping("/customer/{customerId}/monthlyReport")
     public Map<String, Object> getMonthlyReport(@PathVariable(CUSTOMER_ID_KEY) Long customerId) {
         return customerRewardsService.getMonthlyReport(customerId);
-
     }
 
     @GetMapping("/customer/{id}/totalPoints")
